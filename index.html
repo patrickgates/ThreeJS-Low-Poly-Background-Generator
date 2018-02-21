@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Low Poly 3D Background</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+			
+			#logo {
+				position: absolute;
+				
+				width: 150px;
+				height: 150px;
+				
+				top: 50%;
+				left: 50%;
+				margin-left: -75px;
+				margin-top: -75px;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="logo" src="library/logo.svg" />
+
+		<div id="container"></div>
+    
+		<script src="build/js/vendors.js"></script>
+		<script src="library/js/OrbitControls.js"></script>
+		<script src="build/js/application.js"></script>
+
+	</body>
+</html>

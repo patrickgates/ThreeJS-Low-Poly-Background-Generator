@@ -1,0 +1,32 @@
+{
+  "name": "bones",
+  "author": "Patrick Gates <patrick@fuelcreative.agency>",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-filter": "*",
+    "gulp-imagemin": "*",
+    "gulp-line-ending-corrector": "*",
+    "gulp-merge-media-queries": "*",
+    "gulp-notify": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "gulp-uglifycss": "*",
+    "gulp-sort": "*",
+    "gulp-wp-pot": "*",
+    "gulp-if": "*",
+    "gulp-browserify": "*"
+  },
+  "description": "This is a starter Wordpress theme built using Bones. It utilizes  Bower as a javascript package manager, gulp for file minification, scss processing, translation, etc, BrowserSync for live updates, js validations, among other things.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "ISC"
+}
