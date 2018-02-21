@@ -9,10 +9,16 @@ _One of my favorite color schemes I didn't get to use;_
 ![#0040ff](https://placehold.it/15/0040ff/000000?text=+) `#0040ff`
 ![#80ff80](https://placehold.it/15/80ff80/000000?text=+) `#80ff80`
 
+
+
 ![alt text](https://raw.githubusercontent.com/patrickgates/ThreeJS-Low-Poly-Background-Generator/master/readme-images/2.png)
 _The scheme that ended up on the site_
 
+
+
 ![alt text](https://raw.githubusercontent.com/patrickgates/ThreeJS-Low-Poly-Background-Generator/master/readme-images/3.png)
+
+
 
 ![alt text](https://raw.githubusercontent.com/patrickgates/ThreeJS-Low-Poly-Background-Generator/master/readme-images/4.png)
 
