@@ -10,12 +10,14 @@ var jsVendorSRC             = [
   './library/js/vendors/**/*.js'
 ]; // Path to JS vendor folder.
 var jsVendorDestination     = './build/js/'; // Path to place the compiled JS vendors file.
+var jsVendorMinDestination  = './build/js-min/'; // Path to place the compiled JS vendors file.
 var jsVendorFile            = 'vendors'; // Compiled JS vendors file name.
 // Default set to vendors i.e. vendors.js.
 
 // JS Custom related.
 var jsCustomSRC             = './library/js/application/*.js'; // Path to JS vendor folder.
 var jsCustomDestination     = './build/js/'; // Path to place the compiled JS custom scripts file.
+var jsCustomMinDestination  = './build/js-min/';
 var jsCustomFile            = 'application'; // Compiled JS custom file name.
 // Default set to custom i.e. custom.js.
 
@@ -125,14 +127,17 @@ gulp.task( 'browser-sync', function() {
   *     3. Renames the JS file with suffix .min.js
   *     4. Uglifes/Minifies the JS file and generates vendors.min.js
   */
-gulp.task( 'vendorsJs', function() {
-  gulp.src( jsVendorSRC )
-    .pipe( concat( jsVendorFile + '.js' ) )
-    .pipe( gulpif( global.uglifyEnv === true, uglify() ) ) 
-    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-    .pipe( gulp.dest( jsVendorDestination ) )
-    .pipe( notify( { message: 'TASK: "vendorsJs" Completed! 💯', onLast: true } ) );
-});
+  gulp.task( 'vendorsJs', function() {
+    var name = global.uglifyEnv === false ? jsVendorFile + '.js' : jsVendorFile + '.min.js';
+    var dest = global.uglifyEnv === false ? jsVendorDestination : jsVendorMinDestination;
+    
+    gulp.src( jsVendorSRC )
+      .pipe( concat(name) )
+      .pipe( gulpif( global.uglifyEnv === true, uglify() ) ) 
+      .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+      .pipe( gulp.dest( dest ) )
+      .pipe( notify( { message: 'TASK: "vendorsJs" Completed! 💯', onLast: true } ) );
+  });
 
 
  /**
@@ -146,18 +151,21 @@ gulp.task( 'vendorsJs', function() {
   *     3. Renames the JS file with suffix .min.js
   *     4. Uglifes/Minifies the JS file and generates custom.min.js
   */
-gulp.task( 'customJS', function() {
-  gulp.src(jsCustomSRC)
-  .pipe(browserify({
-    insertGlobals : true,
-    debug : !gulp.env.production
-  }))
-  .pipe( concat( jsCustomFile + '.js' ) )
-  .pipe( gulpif( global.uglifyEnv === true, uglify() ) )
-  .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-  .pipe( gulp.dest( jsCustomDestination ) )
-  .pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );
-});
+  gulp.task( 'customJS', function() {
+    var name = global.uglifyEnv === false ? jsCustomFile + '.js' : jsCustomFile + '.min.js';
+    var dest = global.uglifyEnv === false ? jsCustomDestination : jsCustomMinDestination;
+    
+    gulp.src(jsCustomSRC)
+    .pipe(browserify({
+      insertGlobals : true,
+      debug : !gulp.env.production
+    }))
+    .pipe( concat(name) )
+    .pipe( gulpif( global.uglifyEnv === true, uglify() ) )
+    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+    .pipe( gulp.dest( dest ) )
+    .pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );
+  });
 
  /**
   * Watch Tasks.
