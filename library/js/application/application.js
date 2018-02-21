@@ -6,7 +6,8 @@ var mouse = new THREE.Vector3();
 
 var mouseLightPow = 10;
 var lightZ = 25;
-var lightInt = 1;
+var lightIntMult = 2; // This controls how much intensity compensation there is for larger displays
+var lightInt = 1 + (((window.innerWidth * window.innerHeight) / ((1920*1080)*lightIntMult)) + (1/lightIntMult));
 var lightDist = 300;
 
 // Height but slightly larger to let the mesh break out of bounds
