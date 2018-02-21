@@ -78,17 +78,7 @@ function init() {
   
   // CREATE A RANDOM TRIANGULATED MESH
   // Create Points
-  noise.seed(Math.random());
-  
-  points = [];
-  
-  for (var i = 0; i < 100; i++) {
-    var x = (Math.random()*height) - (height/2);
-    var y = (Math.random()*width) - (width/2);
-    var z = noise.perlin2(x/100, y/100) * 10;
-    
-    points.push([x, y, z]);
-  }
+  genPoints();
   
   triangulate(points);
   
@@ -152,14 +142,27 @@ function init() {
 
 
 // RECREATE MESH FOR NEW WINDOW SIZES SO MESH EDGES AREN'T EXPOSED ON RESIZE
+var timeout;
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   
   renderer.setSize( window.innerWidth, window.innerHeight );
   
-  scene.remove( mesh );
-  triangulate(points);
+  window.clearTimeout(timeout);
+  timeout = window.setTimeout(function() {
+    height = 150*window.innerWidth / window.innerHeight;
+    width = 150;
+    realH = 100*window.innerWidth / window.innerHeight;
+    realW = 100;
+    lightMultX = realH/2;
+    lightMultY = realW/2;
+    
+    genPoints();
+    
+    scene.remove( mesh );
+    triangulate(points);
+  }, 100);
 }
 
 
@@ -195,6 +198,23 @@ function render() {
   light3.position.y = Math.cos( time * 0.3 ) * lightMultY;
   
   renderer.render( scene, camera );
+}
+
+
+
+// GENERATE RANDOM POINTS IN THE SIZE OF THE DISPLAY
+function genPoints() {
+  noise.seed(Math.random());
+  
+  points = [];
+  
+  for (var i = 0; i < 100; i++) {
+    var x = (Math.random()*height) - (height/2);
+    var y = (Math.random()*width) - (width/2);
+    var z = noise.perlin2(x/100, y/100) * 10;
+    
+    points.push([x, y, z]);
+  }
 }
 
 
